@@ -23,11 +23,7 @@ describe("FundMe", function () {
       // things went well
       const { FundMe, owner } = await loadFixture(deployFundMeFixture);
 
-      // `expect` receives a value and wraps it in an assertion object. These
-      // objects have a lot of utility methods to assert values.
-
-      // This test expects the owner variable stored in the contract to be
-      // equal to our Signer's owner.
+      
       // console.log(FundMe.i_owner);
       expect(await FundMe.i_owner.target).to.equal(owner.target);
     });
@@ -44,7 +40,7 @@ describe("FundMe", function () {
     it("Should not transfer to otherAccount", async function () {
       const { FundMe, otherAccount, owner } = await loadFixture(deployFundMeFixture);
 
-      // We use lock.connect() to send a transaction from another account
+      // We use FundMe.connect() to send a transaction from another account
       await expect(FundMe.connect(otherAccount).withdraw()).to.be.revertedWith("NotOwner");
     });
     it("updating the balance of Contract", async function () {
